@@ -1,0 +1,60 @@
+@import './../../buttons.scss';
+.header-learn{
+    text-transform: uppercase;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    margin-bottom: 60px;
+    &__title {
+        justify-self: center;
+        margin: 0;
+        text-align: center;
+        font-size: 24px;
+        font-weight: 400;
+    }
+}
+.learn{
+    width: 80%;
+    margin: 0 auto;
+    padding: 60px 90px 40px;
+    font-size: 40px;
+    background-color: #fff;
+    text-transform: uppercase;
+    &__front {
+        margin: 0 auto;
+        width: 660px;
+        height: 400px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 60px;
+        border: 2px solid #606060;
+        box-shadow: 8px 8px 20px 15px rgb(203, 203, 203);
+    }
+    &__back {
+        visibility: hidden;
+    }
+}
+.buttons {
+    margin: 0 auto;
+    width: 660px;
+    display: flex;
+    justify-content: space-between;
+    border: none;
+    &__know, &__no {
+        width: 250px;
+        height: 67px;
+        font-size: 24px;
+        line-height: 67px;
+        text-align: center;
+        text-transform: uppercase;
+        color: #FFF7F7;
+    }
+    &__know {
+        background-color: #05A628;
+    }
+    &__no {
+        background-color: rgb(193, 15, 15);
+    }
+}

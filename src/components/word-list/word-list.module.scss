@@ -1,0 +1,23 @@
+.list {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    border-top: 1px solid rgb(152, 152, 152);
+    border-left: 1px solid rgb(152, 152, 152);
+    font-size: 16px;
+}
+.item {
+    display: grid;
+    grid-template-columns: 50px repeat(3, minmax(100px, 1fr)) 150px;
+    grid-template-rows: 50px;
+    border-bottom: 1px solid rgb(152, 152, 152);
+}
+.point {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    text-transform: uppercase;
+    border-right: 1px solid rgb(152, 152, 152);
+    font-size: 20px;
+}

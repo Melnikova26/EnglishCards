@@ -3,16 +3,6 @@ import WordListItem from '../word-list-item/word-list-item';
 import st from './word-list.module.scss';
 
 const WordList = ({data}) => {
-    let num = 0;
-    const element = data.map(item => {
-        const {id, ...itemProps} = item;
-        num++;
-        return (
-            <WordListItem 
-                key = {id}
-                {...itemProps} num = {num}/>
-        )
-    });
     return (
         <ul className={st.list}>
             <li className={st.item}>
@@ -22,7 +12,14 @@ const WordList = ({data}) => {
                 <div className={st.point}>Translation</div>
                 <div className={st.point}></div>
             </li>
-            {element}
+            {data.map(item => {
+                const {id, ...itemProps} = item;
+                return (
+                    <WordListItem 
+                        key = {id}
+                        {...itemProps} num = {id}/>
+                )
+            })}
         </ul>
     )
 }

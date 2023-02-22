@@ -38,8 +38,8 @@ const WordListItem = ({word, transcription, translation, change, num}) => {
                     <div>
                         {
                             change ? 
-                            <button className='button__save' style={{visibility: 'visible'}}>Save</button> :
-                            <button className='button__save' style={{visibility: 'hidden'}}>Save</button>
+                            <button className={`button__save ${st.visible}`}>Save</button> :
+                            <button className='button__save'>Save</button>
                         }
                     </div>
                     <div><img src={edit} alt="edit"/></div>

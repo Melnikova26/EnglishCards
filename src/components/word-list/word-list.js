@@ -2,7 +2,8 @@ import WordListItem from '../word-list-item/word-list-item';
 
 import st from './word-list.module.scss';
 
-const WordList = ({data}) => {
+const WordList = (props) => {
+    const {data} = props;
     return (
         <ul className={st.list}>
             <li className={st.item}>
@@ -17,7 +18,9 @@ const WordList = ({data}) => {
                 return (
                     <WordListItem 
                         key = {id}
-                        {...itemProps} num = {id}/>
+                        {...itemProps} num = {id} onUpdateWord={props.onUpdateWord}
+                        onUpdateTranslation={props.onUpdateTranslation}
+                        onUpdateTranscription={props.onUpdateTranscription}/>
                 )
             })}
         </ul>

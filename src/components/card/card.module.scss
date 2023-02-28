@@ -1,17 +1,23 @@
-@import './../../buttons.scss';
-.header-learn{
+.container {
+    width: 80vw;
+    margin: 0 auto;
+    padding: 45px 60px;
+    border-radius: 40px;
+    background-color: #F9F2EF;
+}
+.header{
     text-transform: uppercase;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     align-items: center;
     margin-bottom: 60px;
-    &__title {
-        justify-self: center;
-        margin: 0;
-        text-align: center;
-        font-size: 24px;
-        font-weight: 400;
-    }
+}
+.title {
+    justify-self: center;
+    margin: 0;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 400;
 }
 .learn{
     width: 80%;
@@ -20,21 +26,33 @@
     font-size: 40px;
     background-color: #fff;
     text-transform: uppercase;
-    &__front {
-        margin: 0 auto;
-        width: 660px;
-        height: 400px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 60px;
-        border: 2px solid #606060;
-        box-shadow: 8px 8px 20px 15px rgb(203, 203, 203);
-    }
-    &__back {
-        visibility: hidden;
-    }
+    
+}
+
+.front {
+    margin: 0 auto;
+    margin-bottom: 40px;
+    width: 660px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 60px;
+    border: 2px solid #606060;
+    box-shadow: 8px 8px 20px 15px rgb(203, 203, 203);
+}
+.showBtn{
+    width: 50%;
+    height: 60px;
+    margin: 0 auto;
+    border-radius: 10px;
+    text-align: center;
+    text-transform: capitalize;
+    font-size: 36px;
+    line-height: 60px;
+    color: #fff;
+    background-color: rgb(83, 197, 83);
 }
 .buttons {
     margin: 0 auto;
@@ -42,19 +60,16 @@
     display: flex;
     justify-content: space-between;
     border: none;
-    &__know, &__no {
+    &__back, &__go {
         width: 250px;
         height: 67px;
         font-size: 24px;
         line-height: 67px;
         text-align: center;
         text-transform: uppercase;
+        border: none;
         color: #FFF7F7;
-    }
-    &__know {
-        background-color: #05A628;
-    }
-    &__no {
-        background-color: rgb(193, 15, 15);
+        background-color: #78B4EB;
+        cursor: pointer;
     }
 }

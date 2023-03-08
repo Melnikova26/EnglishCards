@@ -2,7 +2,7 @@ import { Component } from 'react';
 
 import Header from "../header/header";
 import Main from "../main/main";
-import Card from '../card/card';
+import WordCard from '../word-card/Word-card';
 import Footer from "../footer/footer";
 
 import './app.scss';
@@ -72,7 +72,7 @@ class App extends Component{
 		if (childComponentType === 'ChildComponent1') {
 		ChildComponent = <Main data = {data} onLearn={this.onLearn} onUpdateWord={this.onUpdateWord} onUpdateTranscription={this.onUpdateTranscription} onUpdateTranslation={this.onUpdateTranslation}/>;
 		} else if (childComponentType === 'ChildComponent2') {
-		ChildComponent = <Card data = {data} onBack={this.onBack}/>;
+		ChildComponent = <WordCard data = {data} onBack={this.onBack}/>;
 		}
 		return (
 			<div className="app">

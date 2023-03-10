@@ -15,6 +15,7 @@ class App extends Component{
 				{word: "Flower", transcription: "[ˈflaʊ.ɚ]", translation: "Цветок", change: true, id: 1},
 				{word: "Company", transcription: "[ˈkʌmpənɪ]", translation: "Компания",change: false,  id: 2},
 				{word: "Reveal", transcription: "[rɪˈviːl]", translation: "Раскрывать",change: false,  id: 3},
+				{},
 			],
 			childComponentType: 'ChildComponent1'
 		}

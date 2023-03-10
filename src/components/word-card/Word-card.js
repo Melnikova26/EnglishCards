@@ -1,16 +1,17 @@
 import { useState } from "react";
 import Card from "../card/card";
+import ErrorMessage from "../errorMessage/ErrorMessage";
 
 import st from './word-card.module.scss';
 
 function WordCard(props) {
+
     const {data} = props;
 
     const [currentWordIndex, setCurrentWordIndex] = useState(0);
     const [next, setAnimateNext] = useState(false);
     const [prev, setAnimatePrev] = useState(false);
     const [show, setShow] = useState(false);
-
 
     const changeStateShow = (newState) => {
         setShow(newState);
@@ -27,6 +28,20 @@ function WordCard(props) {
         }, 800);
     }
 
+    let error = false;
+    if (!data[currentWordIndex].word || !data[currentWordIndex].transcription || !data[currentWordIndex].translation){
+        error = true;
+    }
+
+    const errorMessage = error ? <ErrorMessage /> : null;
+    const card = !error ? <Card   show = {show}
+                                    changeStateShow={changeStateShow}
+                                    animateNext = {next}
+                                    animatePrev = {prev}
+                                    word={data[currentWordIndex].word} 
+                                    transcription={data[currentWordIndex].transcription}
+                                    translation={data[currentWordIndex].translation} /> : null;
+
     return (
             <div className={st.container}>
                 <header className={st.header}>
@@ -35,14 +50,8 @@ function WordCard(props) {
                     <div></div>
                 </header>
                 <section className={st.learn}>
-                    <Card   show = {show}
-                            changeStateShow={changeStateShow}
-                            animateNext = {next}
-                            animatePrev = {prev}
-                            word={data[currentWordIndex].word} 
-                            transcription={data[currentWordIndex].transcription}
-                            translation={data[currentWordIndex].translation} />
-                    
+                    {errorMessage}
+                    {card}
                     <div className={st.buttons}>
                         <button className={st.buttons__back} onClick={() => {slider(setAnimatePrev, -1)}} disabled={currentWordIndex === 0}>Назад</button>
                         <div className={st.count}>{currentWordIndex + 1} / {data.length}</div>

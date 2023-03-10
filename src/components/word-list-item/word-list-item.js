@@ -35,7 +35,6 @@ class WordListItem extends Component {
                 ...state.dataRow,
                 [name]: value
             }
-            
         }));
     };
 
@@ -46,10 +45,7 @@ class WordListItem extends Component {
                 ...this.state.dataRow
             }
         });
-        console.log(this.state.prevDataRow);
     }
-
-
 
     onCancel = () => {
         this.setState({
@@ -61,17 +57,18 @@ class WordListItem extends Component {
     }
 
     render(){
-        
-        const {num} = this.props;
         const {change} = this.state;
         const {word, transcription, translation} = this.state.dataRow;
+
         let classNames = `${st.item}`;
+
         if (change) {
             classNames = `${st.item} ${st.active}`;
         }
+
         return (
             <li className={classNames}>
-                <div className={st.point}>{num}</div>
+                <div className={st.point}>{this.props.num}</div>
                 <div className={st.point}>
                     {
                         change ? <input type="text" 

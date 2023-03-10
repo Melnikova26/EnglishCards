@@ -18,9 +18,7 @@ const WordList = (props) => {
                 return (
                     <WordListItem 
                         key = {id}
-                        {...itemProps} num = {id} onUpdateWord={props.onUpdateWord}
-                        onUpdateTranslation={props.onUpdateTranslation}
-                        onUpdateTranscription={props.onUpdateTranscription}/>
+                        {...itemProps} num = {id}/>
                 )
             })}
         </ul>

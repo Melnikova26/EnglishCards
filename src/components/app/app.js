@@ -33,39 +33,6 @@ class App extends Component{
 		})
 	}
 
-	onUpdateWord = (id, newValue) => {
-        this.setState(({data}) => ({
-			data: data.map(item => {
-				if (item.id === id){
-					return {...item, word: newValue}
-				}
-				return item;
-			})
-		}));
-    }
-
-	onUpdateTranslation = (id, newValue) => {
-        this.setState(({data}) => ({
-			data: data.map(item => {
-				if (item.id === id){
-					return {...item, translation: newValue}
-				}
-				return item;
-			})
-		}));
-    }
-
-	onUpdateTranscription = (id, newValue) => {
-        this.setState(({data}) => ({
-			data: data.map(item => {
-				if (item.id === id){
-					return {...item, transcription: newValue}
-				}
-				return item;
-			})
-		}));
-    }
-
 	render() {
 		const {data, childComponentType} = this.state;
 		let ChildComponent;

@@ -9,46 +9,44 @@ class WordListItem extends Component {
         super(props);
         this.state = {
             change: false,
-            word: this.props.word,
-            transcription: this.props.transcription,
-            translation: this.props.translation
+            dataRow: {
+                word: this.props.word,
+                transcription: this.props.transcription,
+                translation: this.props.translation
+            },
+            prevDataRow: {
+                word: this.props.word,
+                transcription: this.props.transcription,
+                translation: this.props.translation
+            },
         }
     }
-
+    
     onEdit = () => {
         this.setState({
             change: true
         })
-        console.log(this.state.word);
-    }
-    onUpdateWord = (event) => {
-        this.setState({
-            word: event.target.value,
-        })
     }
 
-    onUpdateTranscription = (event) => {
-        this.setState({
-            transcription: event.target.value,
-        })
-    }
-
-    onUpdateTranslation = (event) => {
-        this.setState({
-            translation: event.target.value,
-        })
-    }
+    onUpdate = (event) => {
+        const {name, value} = event.target;
+        this.setState((state) => ({
+            dataRow: {
+                ...state.dataRow,
+                [name]: value
+            }
+            
+        }));
+    };
 
     onSave = () => {
         this.setState({
             change: false,
-            word: this.state.word,
-            transcription: this.state.transcription,
-            translation: this.state.translation
-        })
-        this.props.onUpdateWord(this.props.num, this.state.word);
-        this.props.onUpdateTranscription(this.props.num, this.state.transcription);
-        this.props.onUpdateTranslation(this.props.num, this.state.translation);
+            prevDataRow: {
+                ...this.state.dataRow
+            }
+        });
+        console.log(this.state.prevDataRow);
     }
 
 
@@ -56,17 +54,17 @@ class WordListItem extends Component {
     onCancel = () => {
         this.setState({
             change: false,
-            word: this.props.word,
-            transcription: this.props.transcription,
-            translation: this.props.translation
+            dataRow: {
+                ...this.state.prevDataRow
+            }
         })
-        console.log(this.props.word);
-        console.log(this.props.transcription);
     }
 
     render(){
+        
         const {num} = this.props;
-        const {change, word, transcription, translation} = this.state;
+        const {change} = this.state;
+        const {word, transcription, translation} = this.state.dataRow;
         let classNames = `${st.item}`;
         if (change) {
             classNames = `${st.item} ${st.active}`;
@@ -78,7 +76,7 @@ class WordListItem extends Component {
                     {
                         change ? <input type="text" 
                         value={word} name="word"
-                        onChange={this.onUpdateWord} /> :
+                        onChange={this.onUpdate} /> :
                         <input readOnly type="text" 
                         value={word} name="word"/>
                     }
@@ -88,7 +86,7 @@ class WordListItem extends Component {
                     {
                         change ? 
                         <input type="text" value={transcription} name="transcription"
-                                onChange={this.onUpdateTranscription}/> :
+                                onChange={this.onUpdate}/> :
                         <input readOnly type="text" value={transcription} name="transcription"/>
                     }
                     
@@ -97,7 +95,7 @@ class WordListItem extends Component {
                     {
                         change ? 
                         <input type="text" value={translation} name="translation"
-                                onChange={this.onUpdateTranslation}/> :
+                                onChange={this.onUpdate}/> :
                         <input readOnly type="text" value={translation} name="translation"/>
                     }
                     

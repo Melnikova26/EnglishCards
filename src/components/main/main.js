@@ -14,10 +14,7 @@ const Main = (props) => {
                     <button onClick={props.onLearn} className="button button__learn">learning</button>
                 </div>
                 <div className={st.dictionary}>
-                    <WordList data = {data}
-                    onUpdateWord = {props.onUpdateWord}
-                    onUpdateTranslation={props.onUpdateTranslation}
-                    onUpdateTranscription={props.onUpdateTranscription}/>
+                    <WordList data = {data}/>
                 </div>
                 <Add />
             </div>

@@ -4,28 +4,27 @@ import Card from "../card/card";
 import st from './word-card.module.scss';
 
 function WordCard(props) {
+    const {data} = props;
+
     const [currentWordIndex, setCurrentWordIndex] = useState(0);
     const [next, setAnimateNext] = useState(false);
     const [prev, setAnimatePrev] = useState(false);
+    const [show, setShow] = useState(false);
 
-    const words = props.data.map(item => {
-        return item.word;
-    });
-    const transcriptions = props.data.map(item => {
-        return item.transcription;
-    });
-    const translations = props.data.map(item => {
-        return item.translation;
-    });
+
+    const changeStateShow = (newState) => {
+        setShow(newState);
+    }
 
     const slider = (setAnimate, index) => {
         setAnimate(true);
         setTimeout(() => {
             setCurrentWordIndex((prevIndex) => prevIndex + index);
+            setShow(false);
         }, 500);
         setTimeout(() => {
             setAnimate(false);
-        }, 1000);
+        }, 800);
     }
 
     return (
@@ -36,16 +35,18 @@ function WordCard(props) {
                     <div></div>
                 </header>
                 <section className={st.learn}>
-                    <Card   animateNext = {next}
+                    <Card   show = {show}
+                            changeStateShow={changeStateShow}
+                            animateNext = {next}
                             animatePrev = {prev}
-                            word={words[currentWordIndex]} 
-                            transcription={transcriptions[currentWordIndex]}
-                            translation={translations[currentWordIndex]} />
+                            word={data[currentWordIndex].word} 
+                            transcription={data[currentWordIndex].transcription}
+                            translation={data[currentWordIndex].translation} />
                     
                     <div className={st.buttons}>
                         <button className={st.buttons__back} onClick={() => {slider(setAnimatePrev, -1)}} disabled={currentWordIndex === 0}>Назад</button>
-                        <div className={st.count}>{currentWordIndex + 1} / {words.length}</div>
-                        <button className={st.buttons__go} onClick={() => {slider(setAnimateNext, +1)}} disabled={currentWordIndex === words.length - 1}>Вперед</button>
+                        <div className={st.count}>{currentWordIndex + 1} / {data.length}</div>
+                        <button className={st.buttons__go} onClick={() => {slider(setAnimateNext, +1)}} disabled={currentWordIndex === data.length - 1}>Вперед</button>
                     </div>
                 </section>
                 

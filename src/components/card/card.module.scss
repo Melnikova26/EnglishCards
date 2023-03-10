@@ -33,10 +33,10 @@
     cursor: pointer;
 }
 .next {
-    animation: next 1s ease-in-out;
+    animation: next .8s ease-in-out;
 }
 .prev {
-    animation: prev 1s ease-in-out;
+    animation: prev .8s ease-in-out;
 }
   
 @keyframes next {

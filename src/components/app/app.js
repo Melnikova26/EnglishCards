@@ -1,55 +1,63 @@
-import { Component } from 'react';
+import {
+	BrowserRouter as Router,
+	Routes,
+	Route,
+	Link
+} from "react-router-dom";
+import { useState } from 'react';
 
-import Header from "../header/header";
 import Main from "../main/main";
 import WordCard from '../word-card/Word-card';
 import Footer from "../footer/footer";
+import logo from './logo.png';
+import st from './app.module.scss';
 
-import './app.scss';
+const App = () =>{
 
-class App extends Component{
-	constructor(props){
-		super(props);
-		this.state = {
-			data: [
-				{word: "Flower", transcription: "[ˈflaʊ.ɚ]", translation: "Цветок", change: true, id: 1},
-				{word: "Company", transcription: "[ˈkʌmpənɪ]", translation: "Компания",change: false,  id: 2},
-				{word: "Reveal", transcription: "[rɪˈviːl]", translation: "Раскрывать",change: false,  id: 3},
-				{},
-			],
-			childComponentType: 'ChildComponent1'
-		}
-	}
+	const [data, setdata] = useState([
+		{word: "Flower", transcription: "[ˈflaʊ.ɚ]", translation: "Цветок", change: true, id: 1},
+		{word: "Company", transcription: "[ˈkʌmpənɪ]", translation: "Компания",change: false,  id: 2},
+		{word: "Reveal", transcription: "[rɪˈviːl]", translation: "Раскрывать",change: false,  id: 3},
+		{},
+	]);
 
+	return (
+		<Router>
+			<div className={st.app}>
+				<header className={st.header}>
+					<div className={st.cover}>
+						<nav className={st.nav}>
+							<div>
+								<Link to="/" className={st.link}>
+									<img src={logo} alt="Logo" />
+								</Link>
+							</div>
 
-	onLearn = () => {
-		this.setState({
-			childComponentType: 'ChildComponent2'
-		})
-	}
+							<ul className={st.list}>
+								<li className={st.list_item}>
+									<Link to="/" className={st.link}>Home</Link>
+								</li>
+								<li className={st.list_item}>
+									<Link to="/train" className={st.link}>Training</Link>
+								</li>
+							</ul>
+						</nav>
+					</div>
+					
+				</header>
+				
 
-	onBack = () => {
-		this.setState({
-			childComponentType: 'ChildComponent1'
-		})
-	}
+				<Routes>
+					<Route path="/train" element={<WordCard data = {data} />} />
+					<Route path="/" element={<Main data = {data}/>} />
+				</Routes>
 
-	render() {
-		const {data, childComponentType} = this.state;
-		let ChildComponent;
-		if (childComponentType === 'ChildComponent1') {
-		ChildComponent = <Main data = {data} onLearn={this.onLearn} onUpdateWord={this.onUpdateWord} onUpdateTranscription={this.onUpdateTranscription} onUpdateTranslation={this.onUpdateTranslation}/>;
-		} else if (childComponentType === 'ChildComponent2') {
-		ChildComponent = <WordCard data = {data} onBack={this.onBack}/>;
-		}
-		return (
-			<div className="app">
-				<Header />
-				{ChildComponent}
 				<Footer/>
 			</div>
-		);
-	}
+			
+    	</Router>
+	);
+	
   
 }
   

@@ -1,7 +1,7 @@
 import Add from '../add/add';
 import WordList from '../word-list/word-list';
 import st from './main.module.scss';
-import './../../buttons.scss';
+import './../../style/buttons.scss';
 
 const Main = (props) => {
     const {data} = props;

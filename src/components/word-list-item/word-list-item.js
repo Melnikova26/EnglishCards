@@ -2,10 +2,11 @@ import { useState } from 'react';
 import pen from './../../icons/edit.svg';
 import del from './../../icons/delete.svg';
 import st from './word-list-item.module.scss';
-import './../../buttons.scss';
+import './../../style/buttons.scss';
 
 const WordListItem = (props) => {
     const [change, setChange] = useState(false);
+
     const [dataRow, setDataRow] = useState({
         word: props.word,
         transcription: props.transcription,

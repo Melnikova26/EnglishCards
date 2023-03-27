@@ -12,6 +12,7 @@ function WordCard(props) {
     const [next, setAnimateNext] = useState(false);
     const [prev, setAnimatePrev] = useState(false);
     const [show, setShow] = useState(false);
+    const [learnedWords, setLearnedWords] = useState(0);
 
     const changeStateShow = (newState) => {
         setShow(newState);
@@ -28,6 +29,10 @@ function WordCard(props) {
         }, 800);
     }
 
+    const countLearnedWords = () => {
+        setLearnedWords((count) => count + 1);
+    }
+
     let error = false;
     if (!data[currentWordIndex].word || !data[currentWordIndex].transcription || !data[currentWordIndex].translation){
         error = true;
@@ -40,7 +45,8 @@ function WordCard(props) {
                                     animatePrev = {prev}
                                     word={data[currentWordIndex].word} 
                                     transcription={data[currentWordIndex].transcription}
-                                    translation={data[currentWordIndex].translation} /> : null;
+                                    translation={data[currentWordIndex].translation}
+                                    countLearnedWords = {countLearnedWords} /> : null;
 
     return (
             <div className={st.container}>
@@ -58,6 +64,7 @@ function WordCard(props) {
                         <button className={st.buttons__go} onClick={() => {slider(setAnimateNext, +1)}} disabled={currentWordIndex === data.length - 1}>Вперед</button>
                     </div>
                 </section>
+                <div className={st.learnedWords}>Изучено слов: {learnedWords}</div>
                 
             </div>
     );

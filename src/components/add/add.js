@@ -1,5 +1,5 @@
 import st from './add.module.scss';
-import './../../buttons.scss';
+import './../../style/buttons.scss';
 
 
 const Add = () => {

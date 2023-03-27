@@ -1,5 +1,4 @@
 
-@import './../../buttons.scss';
 .item {
     display: grid;
     grid-template-columns: 50px repeat(3, minmax(100px, 1fr)) 150px;

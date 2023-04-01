@@ -1,6 +1,4 @@
 
-
-
 .front {
     margin: 0 auto;
     margin-bottom: 40px;
@@ -26,56 +24,15 @@
     color: #fff;
     background-color: rgb(83, 197, 83);
     cursor: pointer;
+    &:focus{
+        outline: none;
+        border: 2px solid rgb(29, 81, 102);
+        box-shadow: 2px 2px 10px 1px rgb(26, 78, 100);
+    }
 }
-.active{
-    border: 2px solid rgb(29, 81, 102);
-    box-shadow: 2px 2px 10px 1px rgb(26, 78, 100);
-}
+
 .translation{
     height: 60px;
     line-height: 60px;
     cursor: pointer;
-}
-.next {
-    animation: next .8s ease-in-out;
-}
-.prev {
-    animation: prev .8s ease-in-out;
-}
-  
-@keyframes next {
-    0% {
-        transform: translateX(0);
-        opacity: 1;
-    }
-    25% {
-        transform: translateX(-100%);
-        opacity: 0;
-    }
-    50% {
-        transform: translateX(100%);
-        opacity: 0;
-    }
-    100% {
-        transform: translateX(0);
-        opacity: 1;
-    }
-}
-@keyframes prev {
-    0% {
-        transform: translateX(0);
-        opacity: 1;
-    }
-    25% {
-        transform: translateX(100%);
-        opacity: 0;
-    }
-    50% {
-        transform: translateX(-100%);
-        opacity: 0;
-    }
-    100% {
-        transform: translateX(0);
-        opacity: 1;
-    }
 }

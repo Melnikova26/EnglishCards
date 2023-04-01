@@ -1,9 +1,10 @@
 import img from './error.png';
+import st from './errorMessage.module.scss';
 const ErrorMessage = () => {
     return (
         <>
-            <h3 style={{ textAlign: 'center', fontSize: '20px'}}>Похоже вышла ошибка. Пожалуйста, повторите попытку позднее!</h3>
-            <img style={{ display: 'block', width: "300px", height: "400px", objectFit: 'contain', margin: '0 auto'}} src={img} alt=""Error/>
+            <h3 className={st.header}>Похоже произошла ошибка. Пожалуйста, повторите попытку позднее!</h3>
+            <img className={st.desc} src={img} alt=""Error/>
         </>
 
     )

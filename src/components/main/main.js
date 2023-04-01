@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import Add from '../add/add';
 import WordList from '../word-list/word-list';
 import st from './main.module.scss';
@@ -11,7 +12,9 @@ const Main = (props) => {
                 <div className={st.grid}>
                     <div></div>
                     <h3 className={st.header}>You can learn, edit, delete or add words</h3>
-                    <button onClick={props.onLearn} className="button button__learn">learning</button>
+                    <Link to="/train">
+                        <button className="button button__learn">training</button>
+                    </Link>
                 </div>
                 <div className={st.dictionary}>
                     <WordList data = {data}/>

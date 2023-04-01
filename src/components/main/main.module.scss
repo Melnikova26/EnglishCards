@@ -25,4 +25,9 @@
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: 60px;
     align-items: center;
+    a{
+        display: block;
+        text-decoration: none;
+        justify-self: end;
+    }
 }

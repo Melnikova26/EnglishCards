@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import TextInput from '../form/Form';
 import pen from './../../icons/edit.svg';
 import del from './../../icons/delete.svg';
 import st from './word-list-item.module.scss';
@@ -41,60 +42,43 @@ const WordListItem = (props) => {
         setDataRow({...prevDataRow});
     }
 
-        const {word, transcription, translation} = dataRow;
+    const {word, transcription, translation} = dataRow;
 
-        let classNames = `${st.item} ${change ? st.active : null}`;
+    let classNames = `${st.item} ${change ? st.active : null}`;
 
+    const inputs = [
+        {name: 'word', value: word},
+        {name: 'transcription', value: transcription},
+        {name: 'translation', value: translation}
+    ];
 
     return (
         <li className={classNames}>
             <div className={st.point}>{props.num}</div>
-            <div className={st.point}>
-                {
-                    change ? <input type="text" 
-                    value={word} name="word"
-                    onChange={onUpdate} /> :
-                    <input readOnly type="text" 
-                    value={word} name="word"/>
-                }
-                
-            </div>
-            <div className={st.point}>
-                {
-                    change ? 
-                    <input type="text" value={transcription} name="transcription"
-                            onChange={onUpdate}/> :
-                    <input readOnly type="text" value={transcription} name="transcription"/>
-                }
-                
-            </div>
-            <div className={st.point}>
-                {
-                    change ? 
-                    <input type="text" value={translation} name="translation"
-                            onChange={onUpdate}/> :
-                    <input readOnly type="text" value={translation} name="translation"/>
-                }
-                
-            </div>
+            {
+                inputs.map(item =>( 
+                    <TextInput
+                        name={item.name}
+                        value={item.value}
+                        readOnly={!change}
+                        onChange={onUpdate}
+                    />
+                ))
+            }
             <div className={st.point}>
                 <div className={st.img}>
-                    <div className={st.edbtn}>
-                        {
-                            change ? 
-                            <button onClick={onSave} className={`button__save ${st.visible}`}></button> :
-                            <button className='button__save'></button>
-                        }
-
-                        {
-                            change ? 
-                            <button 
-                            className={`button__clone ${st.visible}`}
-                            onClick={onCancel} >
-                                &times;</button> :
-                            <button className='button__clone'>&times;</button>
-                        }
-                    </div>
+                    {
+                        change ? 
+                            <div className={st.edbtn}>
+                                <button onClick={onSave} className={`button__save ${st.visible}`}></button>
+                                <button className={`button__clone ${st.visible}`} onClick={onCancel}>&times;</button>
+                            </div>
+                            :
+                            <div className={st.edbtn}>
+                                <button className='button__save'></button>
+                                <button className='button__clone'>&times;</button>
+                            </div>
+                    }
                     <div onClick={onEdit}><img src={pen} alt="edit"/></div>
                     <div><img src={del} alt="del"/></div>
                 </div>

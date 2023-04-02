@@ -57,3 +57,10 @@
 .visible {
     visibility: visible;
 }
+.red {
+    border: 2px solid rgb(255, 2, 2)!important;
+}
+button:disabled {
+    filter: grayscale(50%);
+}
+

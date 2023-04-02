@@ -1,5 +1,6 @@
 .point {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 10px;
@@ -15,4 +16,9 @@
             outline: none;
         }
     }
+}
+.error {
+    margin-top: 5px;
+    color: rgb(224, 24, 24);
+    font-size: 8px;
 }

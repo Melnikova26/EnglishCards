@@ -4,8 +4,7 @@ import WordList from '../word-list/word-list';
 import st from './main.module.scss';
 import './../../style/buttons.scss';
 
-const Main = (props) => {
-    const {data} = props;
+const Main = () => {
     return (
         <main className={st.main}>
             <div className={st.container}>
@@ -17,7 +16,7 @@ const Main = (props) => {
                     </Link>
                 </div>
                 <div className={st.dictionary}>
-                    <WordList data = {data}/>
+                    <WordList />
                 </div>
                 <Add />
             </div>

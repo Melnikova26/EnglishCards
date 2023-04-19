@@ -1,18 +1,21 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import Card from "../card/card";
 import ErrorMessage from "../errorMessage/ErrorMessage";
+import { DataContext } from "../Context/ContextProvider";
 
 import st from './word-card.module.scss';
 
-function WordCard(props) {
+function WordCard() {
 
-    const {data} = props;
-
+    const {data} = useContext(DataContext);
+    
     const [currentWordIndex, setCurrentWordIndex] = useState(0);
     const [animate, setAnimate] = useState('');
     const [show, setShow] = useState(false);
     const [learnedWords, setLearnedWords] = useState(0);
+    const [checked, setChecked] = useState([]);
+
 
     const slider = (index) => {
         if(index === 1){
@@ -28,13 +31,13 @@ function WordCard(props) {
             setAnimate('');
         }, 800);
     }
-    const getWords = () => {
+    const getWords = (id) => {
         setShow(true);
         setLearnedWords((count) => count + 1);
+        setChecked([...checked, id]);
     }
-
     function getProps(){
-        if(!data[currentWordIndex].word || !data[currentWordIndex].transcription || !data[currentWordIndex].translation){
+        if(!data[currentWordIndex].english || !data[currentWordIndex].transcription || !data[currentWordIndex].russian){
             return <ErrorMessage />;
         }
         return <Card   
@@ -42,8 +45,11 @@ function WordCard(props) {
                     getWords={getWords}
                     animate = {animate}
                     data={data[currentWordIndex]}
+                    currentWordIndex={currentWordIndex}
+                    checked= {checked}
                 />
     }
+
     return (
             <div className={st.container}>
                 <header className={st.header}>

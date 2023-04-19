@@ -11,23 +11,25 @@ const WordListItem = (props) => {
     const [isEmpty, setIsEmpty] = useState(false);
 
     const [dataRow, setDataRow] = useState({
-        word: props.word,
+        id: props.id,
+        english: props.english,
         transcription: props.transcription,
-        translation: props.translation
+        russian: props.russian
     });
     const [prevDataRow, setPrevDataRow] = useState({
-        word: props.word,
+        id: props.id,
+        english: props.english,
         transcription: props.transcription,
-        translation: props.translation
+        russian: props.russian
     });
     
     useEffect(() => {
-        if(!dataRow.word || !dataRow.translation || !dataRow.transcription){
+        if(!dataRow.english || !dataRow.russian || !dataRow.transcription){
             setIsEmpty(true);
         } else {
             setIsEmpty(false);
         }
-    }, [dataRow.word, dataRow.translation, dataRow.transcription]);
+    }, [dataRow.english, dataRow.russian, dataRow.transcription]);
 
     const onEdit = () => {
         setChange(true);
@@ -44,6 +46,7 @@ const WordListItem = (props) => {
     const onSave = () => {
         setChange(false);
         setPrevDataRow({...dataRow});
+        props.updateWord(dataRow);
         console.log(dataRow);
     }
 
@@ -52,15 +55,21 @@ const WordListItem = (props) => {
         setDataRow({...prevDataRow});
     }
 
-    const {word, transcription, translation} = dataRow;
+    const {english, transcription, russian} = dataRow;
 
     let classNames = `${st.item} ${change ? st.active : null}`;
 
     const inputs = [
-        {name: 'word', value: word, id: 1},
+        {name: 'english', value: english, id: 1},
         {name: 'transcription', value: transcription, id: 2},
-        {name: 'translation', value: translation, id: 3}
+        {name: 'russian', value: russian, id: 3}
     ];
+    const remove = () => {
+        const confirmDelete = window.confirm(`Are you sure you want to delete "${dataRow.english}"?`);
+        if (confirmDelete) {
+            props.removeWord(props.id);
+        }
+    };
 
     return (
         <li className={classNames}>
@@ -94,7 +103,7 @@ const WordListItem = (props) => {
                             </div>
                     }
                     <div onClick={onEdit}><img src={pen} alt="edit"/></div>
-                    <div><img src={del} alt="del"/></div>
+                    <div onClick={remove}><img src={del} alt="del"/></div>
                 </div>
             </div>
         </li>

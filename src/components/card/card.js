@@ -7,7 +7,6 @@ import './../../style/buttons.scss';
 const Card =  (props) => {
     const checkRef = useRef(null);
     const {data, animate, show, getWords, currentWordIndex, checked} = props;
-    // const {english, transcription, russian} = dataCur;
     
     useEffect(() => {
         if(!checked.includes(currentWordIndex)){

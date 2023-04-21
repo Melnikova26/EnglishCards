@@ -37,11 +37,6 @@ const ContextProvider = ({children}) => {
 		const json = JSON.stringify(newWord);
 		await request(`${_apiBase}.json`, 'POST', json);
 		setData(prevData => [...prevData, newWord]);
-		console.log(data);
-
-		// console.log(newWord);
-		// setData(prevData => [...prevData, newWord]);
-		// console.log(data);
 	};
 	const removeWord = async (id) => {
 		const res = await request(`${_apiBase}.json`);
@@ -51,7 +46,6 @@ const ContextProvider = ({children}) => {
 	};
 
 	const updateWord = async (updatedWord) => {
-			console.log(updatedWord.id, data[6].id);
 			const json = JSON.stringify(updatedWord);
 			const res = await request(`${_apiBase}.json`);
 			const updateItem = Object.keys(res).filter(key => res[key].id === updatedWord.id).toString();

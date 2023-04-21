@@ -7,6 +7,9 @@
     font-size: 16px;
     max-height: 50vh;
     overflow-y: scroll;
+    &::-webkit-scrollbar {
+        width: 0;
+    }
 }
 .item {
     display: grid;

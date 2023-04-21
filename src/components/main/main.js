@@ -18,7 +18,7 @@ const Main = () => {
                 <div className={st.dictionary}>
                     <WordList />
                 </div>
-                <Add />
+                {/* <Add /> */}
             </div>
         </main>
     )

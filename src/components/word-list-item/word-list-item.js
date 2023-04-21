@@ -33,6 +33,7 @@ const WordListItem = (props) => {
 
     const onEdit = () => {
         setChange(true);
+        console.log(change);
     }
 
     const onUpdate = (event) => {

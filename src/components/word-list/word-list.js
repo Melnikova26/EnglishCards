@@ -1,12 +1,20 @@
-import { useContext } from 'react';
+
+import { useEffect } from 'react';
 import WordListItem from '../word-list-item/word-list-item';
-import { DataContext } from '../Context/ContextProvider';
+import { inject, observer } from 'mobx-react';
 import st from './word-list.module.scss';
 
 
-const WordList = () => {
-    const {data, removeWord, updateWord} = useContext(DataContext);
-
+const WordList = inject(['dataStore'])(observer(({ dataStore }) => {
+    
+    useEffect(() => {
+        async function fetchData() {
+            await dataStore.initializeStore();
+        }
+        fetchData();
+        console.log(dataStore);
+    }, []);
+    
     return (
         <ul className={st.list}>
             <li className={st.item}>
@@ -16,19 +24,19 @@ const WordList = () => {
                 <div className={st.point}>Translation</div>
                 <div className={st.point}></div>
             </li>
-            {data.map((item, i) => {
+            {dataStore.data.map((item, i) => {
                 const {id} = item;
                 return (
                     <WordListItem 
                         key = {id}
                         {...item}
                         num = {i + 1}
-                        removeWord={removeWord}
-                        updateWord={updateWord}/>
+                        removeWord={dataStore.removeWord}
+                        updateWord={dataStore.updateWord}/>
                 )
             })}
         </ul>
     )
-}
+}));
 
 export default WordList;

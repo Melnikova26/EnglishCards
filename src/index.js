@@ -1,12 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './style//index.scss';
-import ContextProvider from "./components/Context/ContextProvider";
 import App from './components/app/app';
+import { Provider } from 'mobx-react';
+import WordsStore from './stores/WordsStore';
+
+import './style/index.scss';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <ContextProvider>
+  <Provider dataStore={WordsStore}>
     <App />
-  </ContextProvider>
+  </Provider>
 );

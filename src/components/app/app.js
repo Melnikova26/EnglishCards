@@ -13,7 +13,7 @@ const App = () =>{
 			<main>
 				<Routes>
 					<Route exact path="/" element={<Main />} />
-					<Route exact path="/train" element={<WordCard />} />
+					{/* <Route exact path="/train" element={<WordCard />} /> */}
 				</Routes>
 			</main>
 			<Footer/>

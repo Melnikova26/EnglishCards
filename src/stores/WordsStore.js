@@ -2,33 +2,25 @@
 
     class WordsStore {
     @observable data = [];
-    @observable loading = true;
-    @observable error = false;
-
-
      constructor () {
         this.apiBase = 'https://dictionarydatas-default-rtdb.firebaseio.com/words';
-        this.initializeStore();
+        this.initialize();
+        this.removeWord = this.removeWord.bind(this);
     }
 
-    @action async initializeStore() {
-        await this.getAllWords();
-    }
-    
     @action async getAllWords() {
-            try {
-            this.loading = true;
-            await fetch(`https://dictionarydatas-default-rtdb.firebaseio.com/words.json`)
-                .then(res => res.json())
-                .then(data => {
-                    this.data = Object.values(data);
+        try {
+            const response = await fetch(`https://dictionarydatas-default-rtdb.firebaseio.com/words.json`);
+            const data = await response.json();
+            return Object.values(data);
+        } catch (err) {
+            console.log(err);
+        } 
+    }
 
-                });
-            } catch (err) {
-                this.error = err.message || 'Something went wrong';
-            } finally {
-                this.loading = false;
-            }
+    @action async initialize() {
+        const words = await this.getAllWords();
+        this.data = words || [];
     }
     @computed get wordData() {
         return this.data;
@@ -43,37 +35,48 @@
             headers: {'Content-Type': 'application/json'}
         }).then(this.data.push(newWord));
         } catch (err) {
-        this.error = err.message || 'Something went wrong';
+            console.log(err);
         }
     }
 
     @action async removeWord(id) {
         try {
-        const res = await this.http(`${this.apiBase}.json`);
-        const removeItem = Object.keys(res).filter((key) => res[key].id === id).toString();
-        await this.http(`${this.apiBase}/${removeItem}.json`, 'DELETE');
-        this.data = this.data.filter((word) => word.id !== id);
-        } catch (err) {
-        this.error = err.message || 'Something went wrong';
-        }
+            if (!this.data) {
+                this.initialize.bind(this)();
+            }
+            const res = await fetch(`https://dictionarydatas-default-rtdb.firebaseio.com/words.json`).then(response => response.json());
+            const removeItem = Object.keys(res).filter((key) => res[key].id === id).toString();
+            await fetch(`https://dictionarydatas-default-rtdb.firebaseio.com/words/${removeItem}.json`,{
+              method: 'DELETE',
+              headers: {'Content-Type': 'application/json'}
+            });
+            console.log(this.data);
+            this.data = this.data.filter((word) => word.id !== id)
+          } catch (err) {
+            console.log(err);
+          }
     }
 
     @action async updateWord(updatedWord) {
         try {
-        const json = JSON.stringify(updatedWord);
-        const res = await this.http(`${this.apiBase}.json`);
-        const updateItem = Object.keys(res).filter((key) => res[key].id === updatedWord.id).toString();
-        await this.http(`${this.apiBase}/${updateItem}.json`, 'PUT', json);
-        this.data = this.data.map((word) => (word.id === updatedWord.id ? updatedWord : word));
+            const json = JSON.stringify(updatedWord);
+            const response = await fetch(`https://dictionarydatas-default-rtdb.firebaseio.com/words.json`);
+            const res = await response.json();
+            console.log(Object.keys(res));
+            const updateItem = Object.keys(res).filter((key) => res[key].id === updatedWord.id).toString();
+            await fetch(`https://dictionarydatas-default-rtdb.firebaseio.com/words/${updateItem}.json`,{
+                method: 'PUT',
+                body: json,
+                headers: {'Content-Type': 'application/json'}
+            });
+            if (updateItem) {
+                this.data.map((word) => (word.id === updatedWord.id ? updatedWord : word));
+            }
         } catch (err) {
-        this.error = err.message || 'Something went wrong';
+            console.log(err);
         }
     }
 
-    @action clearError() {
-        this.error = false;
-    }
     }
     const store = new WordsStore();
-    store.initializeStore();
     export default store;

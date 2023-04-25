@@ -29,11 +29,10 @@ const WordListItem = (props) => {
         } else {
             setIsEmpty(false);
         }
-    }, [dataRow.english, dataRow.russian, dataRow.transcription]);
+    }, [ dataRow.english, dataRow.russian, dataRow.transcription]);
 
     const onEdit = () => {
         setChange(true);
-        console.log(change);
     }
 
     const onUpdate = (event) => {
@@ -68,6 +67,8 @@ const WordListItem = (props) => {
     const remove = () => {
         const confirmDelete = window.confirm(`Are you sure you want to delete "${dataRow.english}"?`);
         if (confirmDelete) {
+            // props.upgrade(props.id);
+            // console.log(props.id)
             props.removeWord(props.id);
         }
     };
@@ -81,7 +82,7 @@ const WordListItem = (props) => {
                         hasError={item.value === ''}
                         key={item.id}
                         name={item.name}
-                        value={item.value}
+                        value={item.value || ''}
                         className={item.value === '' ? st.red : ''}
                         readOnly={!change}
                         onChange={onUpdate}

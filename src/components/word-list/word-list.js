@@ -1,20 +1,31 @@
 
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import WordListItem from '../word-list-item/word-list-item';
+import Spinner from '../spinner/Spinner';
 import { inject, observer } from 'mobx-react';
 import st from './word-list.module.scss';
 
 
 const WordList = inject(['dataStore'])(observer(({ dataStore }) => {
-    
+
+    const {data, removeWord, updateWord, getAllWords} = dataStore;
+    const [isLoaded, setIsLoaded] = useState(false);
     useEffect(() => {
-        async function fetchData() {
-            await dataStore.initializeStore();
+        async function fetchData(){
+            try{
+                await getAllWords();
+                setIsLoaded(true);
+            } catch(e){
+                console.log(e);
+            } 
         }
         fetchData();
-        console.log(dataStore);
-    }, []);
+      }, [data, removeWord]);
     
+    if(!isLoaded){
+        return <Spinner/>
+    }
+
     return (
         <ul className={st.list}>
             <li className={st.item}>
@@ -24,15 +35,15 @@ const WordList = inject(['dataStore'])(observer(({ dataStore }) => {
                 <div className={st.point}>Translation</div>
                 <div className={st.point}></div>
             </li>
-            {dataStore.data.map((item, i) => {
+            {data.map((item, i) => {
                 const {id} = item;
                 return (
                     <WordListItem 
                         key = {id}
                         {...item}
                         num = {i + 1}
-                        removeWord={dataStore.removeWord}
-                        updateWord={dataStore.updateWord}/>
+                        removeWord={removeWord}
+                        updateWord={updateWord}/>
                 )
             })}
         </ul>

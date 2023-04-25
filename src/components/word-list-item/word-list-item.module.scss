@@ -55,7 +55,7 @@
     background-color: rgba(254, 201, 201, 0.5);
 }
 .visible {
-    visibility: visible;
+    visibility: visible!important;
 }
 .red {
     border: 2px solid rgb(255, 2, 2)!important;

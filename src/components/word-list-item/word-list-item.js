@@ -47,7 +47,7 @@ const WordListItem = (props) => {
         setChange(false);
         setPrevDataRow({...dataRow});
         props.updateWord(dataRow);
-        console.log(dataRow);
+
     }
 
     const onCancel = () => {
@@ -64,14 +64,16 @@ const WordListItem = (props) => {
         {name: 'transcription', value: transcription, id: 2},
         {name: 'russian', value: russian, id: 3}
     ];
-    const remove = () => {
-        const confirmDelete = window.confirm(`Are you sure you want to delete "${dataRow.english}"?`);
-        if (confirmDelete) {
-            // props.upgrade(props.id);
-            // console.log(props.id)
-            props.removeWord(props.id);
-        }
-    };
+    const removeWords = () => {
+        props.remove(dataRow.english, props.id);
+
+    }
+    // const remove = async () => {
+    //     const confirmDelete = window.confirm(`Are you sure you want to delete "${dataRow.english}"?`);
+    //     if (confirmDelete) {
+    //         await props.removeWord(props.id);
+    //     }
+    // };
 
     return (
         <li className={classNames}>
@@ -105,7 +107,7 @@ const WordListItem = (props) => {
                             </div>
                     }
                     <div onClick={onEdit}><img src={pen} alt="edit"/></div>
-                    <div onClick={remove}><img src={del} alt="del"/></div>
+                    <div onClick={removeWords}><img src={del} alt="del"/></div>
                 </div>
             </div>
         </li>
